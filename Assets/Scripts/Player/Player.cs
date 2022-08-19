@@ -27,4 +27,13 @@ public class Player : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, Center.position, Time.fixedDeltaTime * speed);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("CollectPlayer"))
+        {
+            Destroy(other.gameObject);
+            playerCreator.SpawnPlayer(1);
+        }
+    }
 }

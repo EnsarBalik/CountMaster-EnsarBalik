@@ -20,7 +20,7 @@ public class PlayerCreator : MonoBehaviour
         for (int i = 0; i < size; i++)
         {
             GameObject newPlayer = Instantiate(player, PlayerPosition(), Quaternion.identity, transform);
-            players.Add(newPlayer);           
+            players.Add(newPlayer);
         }
     }
 

@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Portal : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class Portal : MonoBehaviour
 
     public SpawnerState currentMathState;
     private PlayerCreator playerCreator;
-    private TextMesh sizeText;
+    private TextMeshPro sizeText;
     private MeshRenderer meshRenderer;
     public int size;
     public static bool isGateActive = true;
@@ -20,7 +20,7 @@ public class Portal : MonoBehaviour
     private void Awake()
     {
         playerCreator = GameObject.FindGameObjectWithTag("PlayerBase").GetComponent<PlayerCreator>();
-        sizeText = GetComponentInChildren<TextMesh>();
+        sizeText = GetComponentInChildren<TextMeshPro>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
 

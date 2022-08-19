@@ -5,16 +5,28 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameManager gm;
-    public float speed = 15f;
+
+    Vector3 firstPos, endPos;
+    public float HorSpeed = 0.05f;
+    public float speed = 10f;
     
     private void Update()
     {
-        if (gm.gameStart)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButton(0))
-            {
-                Move();
-            }
+            firstPos = Input.mousePosition;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            endPos = Input.mousePosition;
+            float DeltaX = endPos.x - firstPos.x;
+            transform.Translate(DeltaX * Time.deltaTime * HorSpeed, 0, 0);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            firstPos = Vector3.zero;
+            endPos = Vector3.zero;
         }
     }
 
@@ -23,24 +35,6 @@ public class PlayerController : MonoBehaviour
         if (gm.gameStart)
         {
             transform.Translate(Vector3.forward * speed * Time.fixedDeltaTime);
-        }        
-    }
-
-    public void Move()
-    {
-        float swipeSpeed = 5;
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.transform.localPosition.z;
-
-        Ray ray = Camera.main.ScreenPointToRay(mousePos);
-
-        if (Physics.Raycast(ray,out RaycastHit hit, 80))
-        {
-            Vector3 hitPoint = hit.point;
-            hitPoint.y = transform.position.y;
-            hitPoint.z = transform.position.z;
-
-            transform.position = Vector3.MoveTowards(transform.position, hitPoint, Time.deltaTime * swipeSpeed);
         }
     }
 }
